@@ -1,0 +1,19 @@
+name: Greetings
+
+on: [pull_request, issues]
+permissions: 
+  pull-requests: write 
+  issues: write
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{secrets.GITHUB_TOKEN}}
+        issue-message: |
+          # Message with markdown
+          Onnittelut ensimmaisesta issuesta
+        pr-message: |
+          # Message kun ensimmäinen PR
+          Teit ensimmäisen Pull Requestin
