@@ -1,0 +1,17 @@
+name: Greetwhenissueisclosed
+
+on: #This action will be triggered when issue is closed
+  issues: 
+    types: 
+      - closed
+jobs: # The jobs that run in this workflow
+  label_issues: # The first job is labelled as 'label_issues'
+    runs-on: ubuntu-latest # This job will run on the latest version of   
+    permissions: # This job requires write access to issues in order to abb labels and comment
+      issues: write
+    steps: # The 'steps' section contains the individual tasks that will be performed in this job
+      - name: Comment on new issue #This step comments closed issue
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{github.event.issue.number}} # The issue number is got from the conext of the event
+          body: Issue is resolved. Thanks! # Thanking when issue is closed - see line 5 of this flow: - closed
